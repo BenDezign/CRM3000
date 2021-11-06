@@ -1,19 +1,189 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+{% import 'extra/macros/shortcut.html.twig' as SHORT %}
+<!DOCTYPE html>
+<html lang="fr" prefix="og: http://ogp.me/ns#">
+<!-- BEGIN: Head-->
+
+<head>
+
+    <meta name="keywords" content="{{ app_name }}">
+    <meta name="author" content="BEN PROD">
+    <title>{% block title %}{{ app_name }}{% endblock %}</title>
+    <meta name="description"
+          content="{% block description %}{{ app_name }}{% endblock %}">
+    <meta property="og:title" content="{{ block('title') }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="{{ app.request.uri }}"/>
+    <meta property="og:description" content="{{ block('description') }}"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/logo/favicon.png') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+
+
+    <link rel="canonical" href="{{ app.request.uri }}"/>
+
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet"  type="text/css" href="{{ asset('vendors/css/vendors.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/extensions/tether-theme-arrows.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/extensions/tether.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/extensions/shepherd-theme-default.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/forms/select/select2.min.css') }}">
+{#    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/extensions/sweetalert2.min.css') }}">#}
+{#    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/animate/animate.css') }}">#}
+{#    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/extensions/toastr.css') }}">#}
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/tables/datatable/datatables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendors/css/tables/datatable/extensions/dataTables.checkboxes.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/colors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/fontawesome-all.css') }}">
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/pages/dashboard-analytics.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/pages/card-analytics.css') }}">
+{#    <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins/tour/tour.css') }}">#}
+
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/pages/data-list-view.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/custom-rtl.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css') }}">
+{#    <link rel="stylesheet" type="text/css" href="{{ asset('css/plugins/extensions/toastr.css') }}">#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/mine.css') }}">
+
+
+    {% block css %}{% endblock %}
+
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+<body class="vertical-layout vertical-menu-modern 2-columns navbar-floating footer-static" data-open="click"
+      data-menu="vertical-menu-modern" data-col="2-columns">
+{{ SHORT.big_loader() }}
+
+
+{% if app.user is not null %}
+{% include '/menu.html.twig' %}
+{% endif %}
+
+<!-- BEGIN: Content-->
+<div class="app-content content">
+    <div class="content-overlay"></div>
+
+    <div class="content-wrapper">
+
+
+        <div class="content-body">
+
+            {% include '/alert.tpl.twig' %}
+
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-2 mobile-menu d-xl-none">
+                            <a class="menu_burger menu-toggle hidden-xs" href="#">
+                                <i class="feather icon-menu"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            {% block body %}{% endblock %}
+
+
+        </div>
+    </div>
+</div>
+<!-- END: Content-->
+
+<div class="sidenav-overlay"></div>
+
+{% include '/footer.html.twig' %}
+
+</body>
+<!-- END: Body-->
+
+
+<!-- BEGIN: Vendor JS-->
+<script src="{{ asset('vendors/js/vendors.min.js') }}"></script>
+<!-- BEGIN Vendor JS-->
+
+<!-- BEGIN: Page Vendor JS-->
+{#    <script src="{{ asset('vendors/js/charts/apexcharts.min.js') }}"></script>#}
+{#<script src="{{ asset('vendors/js/extensions/tether.min.js') }}"></script>#}
+{#<script src="{{ asset('vendors/js/extensions/shepherd.min.js') }}"></script>#}
+{#<script src="{{ asset('vendors/js/ui/jquery.sticky.js') }}"></script>#}
+{#<script src="{{ asset('vendors/js/extensions/toastr.min.js') }}"></script>#}
+<!-- END: Page Vendor JS-->
+
+<!-- BEGIN: Theme JS-->
+<script src="{{ asset('js/core/app-menu.js') }}"></script>
+<script src="{{ asset('js/core/app.js') }}"></script>
+<script src="{{ asset('js/scripts/components.js') }}"></script>
+<!-- END: Theme JS-->
+
+<!-- BEGIN: Page JS-->
+{#    <script src="{{ asset('js/scripts/pages/dashboard-analytics.js') }}"></script>#}
+<!-- END: Page JS-->
+
+<script src="{{ asset('/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+<script src="{{ asset('/vendors/js/tables/datatable/datatables.buttons.min.js') }}"></script>
+<script src="{{ asset('/vendors/js/tables/datatable/datatables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('vendors/js/tables/datatable/buttons.bootstrap.min.js') }}"></script>
+<script src="{{ asset('vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>
+<script src="{{ asset('vendors/js/tables/datatable/datatables.checkboxes.min.js') }}"></script>
+<script src="{{ asset('vendors/js/tables/datatable/buttons.print.min.js') }}"></script>
+<script src="{{ asset('vendors/js/tables/datatable/pdfmake.min.js') }}"></script>
+<script src="{{ asset('vendors/js/tables/datatable/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('vendors/js/tables/datatable/vfs_fonts.js') }}"></script>
+<script src="{{ asset('vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
+{#<script src="{{ asset('vendors/js/forms/spinner/jquery.bootstrap-touchspin.js') }}"></script>#}
+{#<script src="{{ asset('vendors/js/uploadpreview/jquery.uploadPreview.min.js') }}"></script>#}
+
+
+<script src="{{ asset('js/scripts/ui/data-list-view.js') }}"></script>
+
+
+
+<script src="{{ asset('/vendors/js/forms/select/select2.min.js') }}"></script>
+
+
+<script>
+    function removeLoader() {
+        $('#page_loader').removeClass('in');
+    }
+
+    function showLoader() {
+        $('#page_loader').addClass('in');
+        setTimeout(function () {
+            removeLoader();
+        }, 10000);
+    }
+
+    $(document).ready(function () {
+        removeLoader();
+        $('[data-toggle="tooltip"]').tooltip({container: 'body'});
+        $('.select2').select2({width:"100%"});
+    });
+</script>
+
+{% block js %}{% endblock %}
+
 </html>

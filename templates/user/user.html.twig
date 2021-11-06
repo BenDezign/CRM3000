@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% set current_path = app.request.get('_route') %}
+{% block body %}
+
+    <div class="row justify-content-left">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    {% if "new" in current_path %}
+                        <h4 class="card-title">Ajouter d'un utilisateur</h4>
+                    {% else %}
+                        <h4 class="card-title">Utilisateur n° {{ user.id }}</h4>
+                        {{ include('user/_delete_form.html.twig') }}
+                    {% endif %}
+                </div>
+                <div class="card-content">
+                    {{ form_start(form) }}
+                    {{ form_errors(form) }}
+                    {{ form_row(form._token) }}
+                    <div class="card-body">
+                        {% include 'user/_form.html.twig' %}
+                    </div>
+                    {{ form_end(form, {'render_rest':false}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

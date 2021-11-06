@@ -1,0 +1,54 @@
+/*
+Error: File to import not found or unreadable: ../../../node_modules/slick-carousel/slick/slick.scss.
+        on line 55 of main.scss
+
+50: @import "layout/responsive";
+51: 
+52: $slick-font-path: "/assets/fonts/";
+53: $slick-loader-path: "/assets/fonts/";
+54: 
+55: @import "../../../node_modules/slick-carousel/slick/slick.scss";
+56: @import "../../../node_modules/slick-carousel/slick/slick-theme.scss";
+
+Backtrace:
+main.scss:55
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/import_node.rb:67:in `rescue in import'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/import_node.rb:44:in `import'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/import_node.rb:28:in `imported_file'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/import_node.rb:37:in `css_import?'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/perform.rb:310:in `visit_import'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/stack.rb:79:in `block in with_base'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/stack.rb:135:in `with_frame'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/stack.rb:79:in `with_base'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/perform.rb:167:in `block in visit_children'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/perform.rb:166:in `visit_children'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/perform.rb:186:in `visit_root'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/perform.rb:157:in `visit'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/visitors/perform.rb:10:in `visit'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/engine.rb:389:in `_render_with_sourcemap'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/engine.rb:307:in `render_with_sourcemap'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/exec/sass_scss.rb:387:in `run'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/exec/base.rb:50:in `parse'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/lib/sass/exec/base.rb:18:in `parse!'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/gems/sass-3.7.3/bin/sass:13:in `<top (required)>'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/bin/sass:23:in `load'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/bin/sass:23:in `<main>'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/bin/ruby_executable_hooks:24:in `eval'
+/Users/jarodxxx/.rvm/gems/ruby-2.6.0/bin/ruby_executable_hooks:24:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: File to import not found or unreadable: ../../../node_modules/slick-carousel/slick/slick.scss.\A         on line 55 of main.scss\A \A 50: @import \"layout/responsive\";\A 51: \A 52: $slick-font-path: \"/assets/fonts/\";\A 53: $slick-loader-path: \"/assets/fonts/\";\A 54: \A 55: @import \"../../../node_modules/slick-carousel/slick/slick.scss\";\A 56: @import \"../../../node_modules/slick-carousel/slick/slick-theme.scss\";"; }

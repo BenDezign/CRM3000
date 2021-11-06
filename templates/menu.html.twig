@@ -1,0 +1,73 @@
+<!-- BEGIN: Main Menu-->
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto"><a class="navbar-brand m-t-0"
+                                            href="">
+                    <div class="brand-logo m-t-8">
+                        <img src="{{ asset('images/logo/favicon.png') }}" alt="{{ app_name }}" class="w-100">
+                    </div>
+                </a>
+
+            </li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
+                            class="feather icon-x d-block d-xl-none font-medium-4 primary toggle-icon"></i><i
+                            class="toggle-icon feather icon-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary"
+                            data-ticon="icon-disc"></i></a></li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content">
+
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+
+            {% set liste_page = ['mon_compte'] %}
+            <li class="nav-item m-t-40">
+                    <span class="menu-title" data-i18n="Moi">
+                        <span><img class="round" src="{{ getAvatar(app.user.name,app.user.email) }}" alt="avatar" height="40" width="40"></span>
+                        {{ app.user.name }}
+                    </span>
+            </li>
+
+            <li class=" navigation-header"><span>Général</span></li>
+
+            {% set liste_page = ['index'] %}
+
+            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %} ">
+                <a href="{{ path('home') }}"><i class="feather icon-home"></i><span class="menu-title">Tableau de bord</span></a>
+            </li>
+            {% set liste_page = ['user_edit'] %}
+            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %} ">
+                <a href="{{ path('user_edit',{'id':app.user.id}) }}"><i class="fal fa-user-circle"></i><span class="menu-title">Mon compte</span></a>
+            </li>
+
+
+            <li class=" navigation-header"><span>Contacts</span></li>
+
+            {% set liste_page = ['user_index'] %}
+
+            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
+                <a href="{{ path('user_index') }}"><i class="fal fa-user"></i><span class="menu-title">Utilisateurs</span></a>
+            </li>
+
+            {% set liste_page = ['company_index'] %}
+
+            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
+                <a href="{{ path('company_index') }}"><i class="fal fa-building"></i><span class="menu-title">Sociétés</span></a>
+            </li>
+
+            {% set liste_page = ['customer_index'] %}
+
+            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
+                <a href="{{ path('customer_index') }}"><i class="fal fa-users"></i><span class="menu-title">Clients</span></a>
+            </li>
+
+
+        </ul>
+
+
+    </div>
+</div>
+<!-- END: Main Menu-->
+
+

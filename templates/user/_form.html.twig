@@ -1,0 +1,48 @@
+
+
+
+    <div class="form-group row">
+        {{ form_label(form.name , 'name'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.name,  {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(form.email , 'email'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.email,  {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form_widget(form.password,  {'attr': {'class': 'form-control'}}) }}
+        {{ form_label(form.passwordForce , 'password'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.passwordForce,  {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(form.roles , 'roles'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.roles,  {'attr': {'class': 'select2'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form_label(form.company , 'company'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.company,  {'attr': {'class': 'select2', 'multiple':'true'}}) }}
+        </div>
+    </div>
+
+
+
+
+
+
+<div class="form-group btn-group">
+    <button class="btn btn-primary mr-1 mb-1">{{ button_label|default('Valider') }}</button>
+    <button type="reset" class="btn btn-outline-danger mr-1 mb-1 btn-sm float-right">Réinitialiser</button>
+</div>

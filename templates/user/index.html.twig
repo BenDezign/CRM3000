@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+{% import 'extra/macros/shortcut.html.twig' as SHORT %}
+{% block body %}
+
+
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h2 class="content-header-title float-left mb-0">{{ "user.list"|trans }}</h2>
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+
+        <section id="basic-datatable">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body card-dashboard">
+
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <a href="{{ path('user_new') }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;{{ "user.add"|trans }}</a>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table id="example" class="data-list-view w-100">
+                                        <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Email</th>
+                                            <th>Nom</th>
+                                            <th>Admin</th>
+                                            <th>Societe</th>
+
+                                            <th>Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for user in users %}
+                                            <tr>
+                                                <td>{{ user.id }}</td>
+                                                <td>{{ user.email }}</td>
+                                                <td>{{ user.name }}</td>
+                                                <td>{{ SHORT.badge_bool("ROLE_ADMIN" in user.roles) }}</td>
+                                                <td>
+                                                    {% for company in user.companies %}
+                                                        <span class="badge bagde-info">{{ company.name }}</span>
+                                                        <br />
+                                                    {% endfor %}
+                                                </td>
+                                                <td>
+
+                                                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info"><i class="fal fa-pencil"></i> Modifier</a>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="6">Aucun résultat</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

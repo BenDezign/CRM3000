@@ -1,0 +1,32 @@
+{% macro badge_bool(item) %}
+    {% if(item) %}
+        <div class="chip chip-success">
+            <div class="chip-body">
+                <div class="chip-text">OUI</div>
+            </div>
+        </div>
+    {% else %}
+
+        <div class="chip chip-danger">
+            <div class="chip-body">
+                <div class="chip-text">NON</div>
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro big_loader() %}
+    <div id="page_loader" class="in">
+        <div class="overlay"></div>
+        <div class="loader">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <div id="page_loader_leave_partie" class="">
+        <div class="overlay"></div>
+        <div class="text_loader">
+            Chargement en cours ...
+        </div>
+    </div>
+{% endmacro %}
