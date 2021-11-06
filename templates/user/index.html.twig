@@ -31,13 +31,13 @@
                                     <table id="example" class="data-list-view w-100">
                                         <thead>
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Email</th>
-                                            <th>Nom</th>
-                                            <th>Admin</th>
-                                            <th>Societe</th>
+                                            <th>{{ 'id'|trans }}</th>
+                                            <th>{{ 'email'|trans }}Email</th>
+                                            <th>{{ 'name'|trans }}Nom</th>
+                                            <th>{{ 'administrator'|trans }}Admin</th>
+                                            <th>{{ 'company'|trans }}Societe</th>
 
-                                            <th>Actions</th>
+                                            <th>{{ 'actions'|trans }}Actions</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -55,12 +55,12 @@
                                                 </td>
                                                 <td>
 
-                                                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info"><i class="fal fa-pencil"></i> Modifier</a>
+                                                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-info"><i class="fal fa-pencil"></i> {{ 'edit'|trans }}</a>
                                                 </td>
                                             </tr>
                                         {% else %}
                                             <tr>
-                                                <td colspan="6">Aucun résultat</td>
+                                                <td colspan="6">{{ 'no_result'|trans }}</td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>

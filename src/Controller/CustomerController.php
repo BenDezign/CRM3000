@@ -36,17 +36,9 @@ class CustomerController extends AbstractController
             return $this->redirectToRoute('customer_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('customer/new.html.twig', [
+        return $this->renderForm('customer/customer.html.twig', [
             'customer' => $customer,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'customer_show', methods: ['GET'])]
-    public function show(Customer $customer): Response
-    {
-        return $this->render('customer/show.html.twig', [
-            'customer' => $customer,
         ]);
     }
 
@@ -62,7 +54,7 @@ class CustomerController extends AbstractController
             return $this->redirectToRoute('customer_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('customer/edit.html.twig', [
+        return $this->renderForm('customer/customer.html.twig', [
             'customer' => $customer,
             'form' => $form,
         ]);

@@ -3,9 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Customer;
+use App\Enum\Status;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class CustomerType extends AbstractType
 {
@@ -15,10 +18,9 @@ class CustomerType extends AbstractType
             ->add('email')
             ->add('firstname')
             ->add('lastname')
-            ->add('createdAt')
-            ->add('lastEmailAt')
             ->add('isReplied')
             ->add('isConsumed')
+            ->add('status', ChoiceType::class, ['choices'=>Status::getChoices(), 'placeholder'=>"Définir un statut"])
         ;
     }
 

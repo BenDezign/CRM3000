@@ -57,6 +57,13 @@ class Customer
      */
     private $status;
 
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTimeImmutable());
+        $this->setIsConsumed(0);
+        $this->setIsReplied(0);
+    }
+
     public function getId(): ?int
     {
         return $this->id;

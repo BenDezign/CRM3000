@@ -1,3 +1,8 @@
+are_you_sur: Êtes-vous sûre ?
+id: Id
+actions: Actions
+edit: Modifier
+no_result: Aucun résultat
 name: Nom
 email: E-mail
 password: Mot de passe
@@ -6,7 +11,22 @@ simple: Simple
 administrator: Administrateur
 company: Société
 delete: Supprimer
+firstname: Prenom
+lastname: Nom
+status: Statuts
+isReplied: Répondu
+isConsumed: Consommé
+createdAt: Date de création
+lastEmailAt: Dernier e-mail
+not_started: Non démarrer
+pending: En cours
+cancel: Refusé
+confirm: Validé
 user:
   list: Liste des utilisateurs
   add: Nouvel utilisateur
   edit: Modification de l'utilisateur n°
+customer:
+  list: Liste des clients
+  add: Nouveau client
+  edit: Modification du client n°

@@ -7,10 +7,10 @@
             <div class="card">
                 <div class="card-header">
                     {% if "new" in current_path %}
-                        <h4 class="card-title">{{ 'user.add'|trans }}</h4>
+                        <h4 class="card-title">{{ 'customer.add'|trans }}</h4>
                     {% else %}
-                        <h4 class="card-title">{{ 'user.edit'|trans}} {{ user.id }}</h4>
-                        {{ include('user/_delete_form.html.twig') }}
+                        <h4 class="card-title">{{ 'customer.edit'|trans }} {{ customer.id }}</h4>
+                        {{ include('customer/_delete_form.html.twig') }}
                     {% endif %}
                 </div>
                 <div class="card-content">
@@ -18,7 +18,7 @@
                     {{ form_errors(form) }}
                     {{ form_row(form._token) }}
                     <div class="card-body">
-                        {% include 'user/_form.html.twig' %}
+                        {% include 'customer/_form.html.twig' %}
                     </div>
                     {{ form_end(form, {'render_rest':false}) }}
                 </div>
