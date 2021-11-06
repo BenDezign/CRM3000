@@ -31,7 +31,7 @@
 </div>
 
 <div class="form-group row">
-    {{ form_label(form.company , 'company'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+    {{ form_label(form.company , 'company.label'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
     <div class="col-sm-9">
         {{ form_widget(form.company,  {'attr': {'class': 'select2', 'multiple':'true'}}) }}
     </div>

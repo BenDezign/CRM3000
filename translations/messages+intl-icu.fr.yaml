@@ -9,7 +9,6 @@ password: Mot de passe
 roles: Roles
 simple: Simple
 administrator: Administrateur
-company: Société
 delete: Supprimer
 firstname: Prenom
 lastname: Nom
@@ -22,11 +21,22 @@ not_started: Non démarrer
 pending: En cours
 cancel: Refusé
 confirm: Validé
+users: Utilisateurs
 user:
   list: Liste des utilisateurs
   add: Nouvel utilisateur
-  edit: Modification de l'utilisateur n°
+  edit: "Modification de l'utilisateur n°"
 customer:
   list: Liste des clients
   add: Nouveau client
   edit: Modification du client n°
+company:
+  label: Société
+  list: Liste des sociétés
+  add: Nouvelle société
+  edit: Modification de la société n°
+siret: Siret
+address: Adresse
+city: Ville
+zipCode: Code Postal
+userAdmin: Utilisateur Admin

@@ -32,12 +32,12 @@
                                         <thead>
                                         <tr>
                                             <th>{{ 'id'|trans }}</th>
-                                            <th>{{ 'email'|trans }}Email</th>
-                                            <th>{{ 'name'|trans }}Nom</th>
-                                            <th>{{ 'administrator'|trans }}Admin</th>
-                                            <th>{{ 'company'|trans }}Societe</th>
+                                            <th>{{ 'email'|trans }}</th>
+                                            <th>{{ 'name'|trans }}</th>
+                                            <th>{{ 'administrator'|trans }}</th>
+                                            <th>{{ 'company.label'|trans }}</th>
 
-                                            <th>{{ 'actions'|trans }}Actions</th>
+                                            <th>{{ 'actions'|trans }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -48,7 +48,7 @@
                                                 <td>{{ user.name }}</td>
                                                 <td>{{ SHORT.badge_bool("ROLE_ADMIN" in user.roles) }}</td>
                                                 <td>
-                                                    {% for company in user.companies %}
+                                                    {% for company in user.company %}
                                                         <span class="badge bagde-info">{{ company.name }}</span>
                                                         <br />
                                                     {% endfor %}

@@ -36,17 +36,9 @@ class CompanyController extends AbstractController
             return $this->redirectToRoute('company_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('company/new.html.twig', [
+        return $this->renderForm('company/company.html.twig', [
             'company' => $company,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'company_show', methods: ['GET'])]
-    public function show(Company $company): Response
-    {
-        return $this->render('company/show.html.twig', [
-            'company' => $company,
         ]);
     }
 
@@ -62,7 +54,7 @@ class CompanyController extends AbstractController
             return $this->redirectToRoute('company_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('company/edit.html.twig', [
+        return $this->renderForm('company/company.html.twig', [
             'company' => $company,
             'form' => $form,
         ]);

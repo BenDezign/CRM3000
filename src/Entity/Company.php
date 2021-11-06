@@ -50,7 +50,7 @@ class Company
     private $userAdmin;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="company")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="company",cascade={"persist"})
      */
     private $users;
 
@@ -161,5 +161,10 @@ class Company
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 }

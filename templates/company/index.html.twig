@@ -1,43 +1,75 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Company index{% endblock %}
-
+{% import 'extra/macros/shortcut.html.twig' as SHORT %}
 {% block body %}
-    <h1>Company index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Siret</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>ZipCode</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for company in companies %}
-            <tr>
-                <td>{{ company.id }}</td>
-                <td>{{ company.siret }}</td>
-                <td>{{ company.name }}</td>
-                <td>{{ company.address }}</td>
-                <td>{{ company.city }}</td>
-                <td>{{ company.zipCode }}</td>
-                <td>
-                    <a href="{{ path('company_show', {'id': company.id}) }}">show</a>
-                    <a href="{{ path('company_edit', {'id': company.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('company_new') }}">Create new</a>
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h2 class="content-header-title float-left mb-0">{{ "company.list"|trans }}</h2>
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+
+        <section id="basic-datatable">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body card-dashboard">
+
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <a href="{{ path('company_new') }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;{{ "company.add"|trans }}</a>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table id="example" class="data-list-view w-100">
+                                        <thead>
+                                        <tr>
+                                            <th>{{ 'id'|trans }}</th>
+                                            <th>{{ 'siret'|trans }}</th>
+                                            <th>{{ 'name'|trans }}</th>
+                                            <th>{{ 'address'|trans }}</th>
+                                            <th>{{ 'city'|trans }}</th>
+                                            <th>{{ 'zipCode'|trans }}</th>
+                                            <th>{{ 'userAdmin'|trans }}</th>
+
+                                            <th>{{ 'actions'|trans }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for company in companies %}
+                                            <tr>
+                                                <td>{{ company.id }}</td>
+                                                <td>{{ company.siret }}</td>
+                                                <td>{{ company.name }}</td>
+                                                <td>{{ company.address }}</td>
+                                                <td>{{ company.city }}</td>
+                                                <td>{{ company.zipCode }}</td>
+                                                <td>{{ company.userAdmin.name|default('') }}</td>
+                                                <td>
+
+                                                    <a href="{{ path('company_edit', {'id': company.id}) }}" class="btn btn-info"><i class="fal fa-pencil"></i> {{ 'edit'|trans }}</a>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="6">{{ 'no_result'|trans }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 {% endblock %}

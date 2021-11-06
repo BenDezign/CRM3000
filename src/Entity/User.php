@@ -43,7 +43,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $companies;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Company::class, inversedBy="users")
+     * @ORM\ManyToMany(targetEntity=Company::class, inversedBy="users", cascade={"persist"})
      */
     private $company;
 
@@ -107,27 +107,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->companies;
     }
 
-    public function addCompany(Company $company): self
-    {
-        if (!$this->companies->contains($company)) {
-            $this->companies[] = $company;
-            $company->setUserAdmin($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompany(Company $company): self
-    {
-        if ($this->companies->removeElement($company)) {
-            // set the owning side to null (unless already changed)
-            if ($company->getUserAdmin() === $this) {
-                $company->setUserAdmin(null);
-            }
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|Company[]
@@ -135,6 +114,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getCompany(): Collection
     {
         return $this->company;
+    }
+
+    public function addCompany(Company $company): self
+    {
+        if (!$this->company->contains($company)) {
+            $this->company[] = $company;
+        }
+
+        return $this;
+    }
+
+    public function removeCompany(Company $company): self
+    {
+        $this->company->removeElement($company) ;
+        return $this;
     }
 
     public function setRoles(array $roles): self
@@ -162,7 +156,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getUsername()
     {
-        return (string) $this->email;
+        return (string)$this->email;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getName();
     }
 
 }
