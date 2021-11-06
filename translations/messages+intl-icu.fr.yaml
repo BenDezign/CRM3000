@@ -1,0 +1,12 @@
+name: Nom
+email: E-mail
+password: Mot de passe
+roles: Roles
+simple: Simple
+administrator: Administrateur
+company: Société
+delete: Supprimer
+user:
+  list: Liste des utilisateurs
+  add: Nouvel utilisateur
+  edit: Modification de l'utilisateur n°

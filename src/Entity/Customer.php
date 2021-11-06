@@ -52,6 +52,11 @@ class Customer
      */
     private $isConsumed;
 
+    /**
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +142,18 @@ class Customer
     public function setIsConsumed(?bool $isConsumed): self
     {
         $this->isConsumed = $isConsumed;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
