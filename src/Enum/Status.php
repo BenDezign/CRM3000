@@ -9,24 +9,6 @@ abstract class Status
     const STATUS_CANCEL = 'cancel';
     const STATUS_CONFIRM = 'confirm';
 
-    /** @var array user friendly named type */
-    protected static $typeName = [
-        self::STATUS_NOT_STARTED => 'not_started',
-        self::STATUS_PENDING => 'pending',
-        self::STATUS_CANCEL => 'cancel',
-        self::STATUS_CONFIRM => 'confirm',
-    ];
-
-
-    public static function getStatusName(string $statusShortName): string
-    {
-        if (!isset(static::$typeName[$statusShortName])) {
-            return "Unknown type ($statusShortName)";
-        }
-
-        return static::$typeName[$statusShortName];
-    }
-
     public static function getAvailableStatus(): array
     {
         return [
