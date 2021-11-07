@@ -77,7 +77,7 @@ class FactureController extends AbstractController
 
         $email = (new TemplatedEmail())
             ->from(new Address($_ENV['ADMIN_EMAIL'], $_ENV['APP_NAME']))
-            ->to(new Address($this->getUser()->getEmail()))
+            ->to(new Address($this->getUser()->getEmail()), 'User Admin')
             ->subject('Nouvelle Facture #' . $id->getId())
             ->attachFromPath($facture_path, 'Facture LAYAN N° ' . $id->getId())
             ->htmlTemplate('email/facture/index.html.twig')
