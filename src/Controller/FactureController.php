@@ -52,10 +52,11 @@ class FactureController extends AbstractController
             foreach ($ls_detail as $item) {
                 $item->setFacture($facture);
                 $total_line = $item->getPU() * $item->getQtt();
-                if (!is_null($item->getTva()))
+                if (!is_null($item->getTva())) {
                     $item->setMontantTva(($total_line * $item->getTva()->getTva()) - $total_line);
-                else
+                }else {
                     $item->setMontantTva(0);
+                }
                 $entityManager->flush();
             }
 
@@ -85,14 +86,12 @@ class FactureController extends AbstractController
             ->from(new Address($_ENV['ADMIN_EMAIL'], $_ENV['APP_NAME']))
             ->to(new Address($this->getUser()->getEmail(), $this->getUser()->getName()))
             ->subject('Nouvelle Facture #' . $id->getId())
-            ->attachFromPath($facture_path, 'Facture LAYAN N° '.$id->getId())
-            // path of the Twig template to render
+            ->attachFromPath($facture_path, 'Facture LAYAN N° ' . $id->getId())
             ->htmlTemplate('email/facture/index.html.twig')
-
-            // pass variables (name => value) to the template
             ->context([
                 'facture' => $id,
             ]);
+
         $mailer_res = $this->mailer->send($email);
 
 
@@ -115,12 +114,12 @@ class FactureController extends AbstractController
             foreach ($ls_detail as $item) {
                 $item->setFacture($facture);
                 $total_line = $item->getPU() * $item->getQtt();
-                if (!is_null($item->getTva()))
+                if (!is_null($item->getTva())) {
                     $item->setMontantTva(($total_line * $item->getTva()->getTva()) - $total_line);
-                else
+                } else {
                     $item->setMontantTva(0);
+                }
                 $this->getDoctrine()->getManager()->flush();
-
             }
             return $this->redirectToRoute('facture_index', [], Response::HTTP_SEE_OTHER);
         }

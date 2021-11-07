@@ -101,11 +101,7 @@ class CustomerController extends AbstractController
             ->from(new Address($_ENV['ADMIN_EMAIL'], $_ENV['APP_NAME']))
             ->to(new Address($customer->getEmail(), $customer->getLastname()))
             ->subject($this->getSubjectFromStatus($customer))
-
-            // path of the Twig template to render
             ->htmlTemplate('email/customer/tpl_' . $customer->getStatus() . '.html.twig');
-
-        // pass variables (name => value) to the template
 
         $this->mailer->send($email);
 
