@@ -68,7 +68,7 @@ EOT
 
         $output->writeln(sprintf('Created user <comment>%s</comment>', $email));
 
-        return 1;
+        return Command::SUCCESS;
     }
 
     /**

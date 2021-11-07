@@ -69,3 +69,5 @@ address: Adresse
 city: Ville
 zipCode: Code Postal
 userAdmin: Utilisateur Admin
+envoie_email: Envoie email
+pdf: Visualisaer le PDF

@@ -340,11 +340,11 @@
     <div id="details">
         <div id="client" class="clearfix-light">
             <div class="to">{{ 'facture.to'|trans }} :</div>
-            <h2 class="name"> {{ facture.company.name }}</h2>
+            <h2 class="name"> {{ facture.company.name|default('') }}</h2>
             <div class="address">
-                {{ facture.company.address }}<br />
-                {{ facture.company.zipCode }}
-                {{ facture.company.city }}
+                {{ facture.company.address|default('') }}<br />
+                {{ facture.company.zipCode|default('') }}
+                {{ facture.company.city|default('') }}
             </div>
         </div>
         <div id="invoice">

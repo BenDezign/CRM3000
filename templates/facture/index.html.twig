@@ -31,7 +31,11 @@
                                 <td>{{ facture.company.name|default('') }}</td>
                                 <td>{{ facture.createdAt|date('d-m-Y') }}</td>
                                 <td>
+                                    <div class="btn-group">
                                     <a href="{{ path('facture_edit', {'id': facture.id}) }}" class="btn btn-info"><i class="fal fa-pencil"></i> {{ 'edit'|trans}} </a>
+                                    <a href="javascript:void(0);" data-href="{{ path('facture_mail_send' , {'id':facture.id}) }}" class="sendAnEmail btn btn-primary"><i class="fal fa-mailbox"></i> {{ 'envoie_email'|trans}} </a>
+                                    <a href="{{ path('facture_pdf' , {'id':facture.id}) }}" target="_blank" class="btn btn-secondary"><i class="fal fa-file-invoice-dollar"></i> {{ 'pdf'|trans}} </a>
+                                    </div>
                                 </td>
                             </tr>
                         {% else %}
@@ -45,4 +49,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    {{ include('component/script/sendEmail.html.twig') }}
 {% endblock %}
