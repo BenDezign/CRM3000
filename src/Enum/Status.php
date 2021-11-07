@@ -24,7 +24,7 @@ abstract class Status
         $choices = [];
 
         foreach (self::getAvailableStatus() as $choice) {
-            $choices[static::$typeName[$choice]] = $choice;
+            $choices[$choice] = $choice;
         }
 
         return $choices;
