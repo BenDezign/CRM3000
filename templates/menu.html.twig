@@ -38,45 +38,49 @@
             </li>
             {% set liste_page = ['user_edit'] %}
             <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %} ">
-                <a href="{{ path('user_edit',{'id':app.user.id}) }}"><i class="fal fa-user-circle"></i><span class="menu-title">Mon compte</span></a>
+                <a href="{{ path('user_account') }}"><i class="fal fa-user-circle"></i><span class="menu-title">Mon compte</span></a>
+            </li>
+
+            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %} ">
+                <a href="{{ path('app_logout') }}"><i class="fal fa-sign-out"></i><span class="menu-title">Déconnexion</span></a>
             </li>
 
 
             <li class=" navigation-header"><span>Contacts</span></li>
+            {% if is_granted('ROLE_ADMIN') %}
+                {% set liste_page = ['user_index'] %}
 
-            {% set liste_page = ['user_index'] %}
+                <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
+                    <a href="{{ path('user_index') }}"><i class="fal fa-user"></i><span class="menu-title">Utilisateurs</span></a>
+                </li>
 
-            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
-                <a href="{{ path('user_index') }}"><i class="fal fa-user"></i><span class="menu-title">Utilisateurs</span></a>
-            </li>
+                {% set liste_page = ['company_index'] %}
 
-            {% set liste_page = ['company_index'] %}
-
-            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
-                <a href="{{ path('company_index') }}"><i class="fal fa-building"></i><span class="menu-title">Sociétés</span></a>
-            </li>
-
+                <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
+                    <a href="{{ path('company_index') }}"><i class="fal fa-building"></i><span class="menu-title">Sociétés</span></a>
+                </li>
+            {% endif %}
             {% set liste_page = ['customer_index'] %}
 
             <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
                 <a href="{{ path('customer_index') }}"><i class="fal fa-users"></i><span class="menu-title">Clients</span></a>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class=" navigation-header"><span>Comptabilité</span></li>
 
-            <li class=" navigation-header"><span>Comptabilité</span></li>
+                {% set liste_page = ['facture_index'] %}
 
-            {% set liste_page = ['facture_index'] %}
+                <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
+                    <a href="{{ path('facture_index') }}"><i class="fal fa-file-invoice-dollar"></i><span class="menu-title">Factures</span></a>
+                </li>
 
-            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
-                <a href="{{ path('facture_index') }}"><i class="fal fa-file-invoice-dollar"></i><span class="menu-title">Factures</span></a>
-            </li>
+                {% set liste_page = ['tva_index'] %}
 
-            {% set liste_page = ['tva_index'] %}
+                <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
+                    <a href="{{ path('tva_index') }}"><i class="fal fa-sliders-v"></i><span class="menu-title">Tva</span></a>
+                </li>
 
-            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
-                <a href="{{ path('tva_index') }}"><i class="fal fa-sliders-v"></i><span class="menu-title">Tva</span></a>
-            </li>
-
-
+            {% endif %}
 
         </ul>
 

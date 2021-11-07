@@ -1,6 +1,3 @@
-
-
-
 <div class="form-group row">
     {{ form_label(form.name , 'name'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
     <div class="col-sm-9">
@@ -12,6 +9,7 @@
     {{ form_label(form.email , 'email'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
     <div class="col-sm-9">
         {{ form_widget(form.email,  {'attr': {'class': 'form-control'}}) }}
+        <span class="badge badge-danger badge-pill">{{ form_errors(form.email) }}</span>
     </div>
 </div>
 
@@ -22,24 +20,21 @@
         {{ form_widget(form.passwordForce,  {'attr': {'class': 'form-control'}}) }}
     </div>
 </div>
-
-<div class="form-group row">
-    {{ form_label(form.roles , 'roles'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
-    <div class="col-sm-9">
-        {{ form_widget(form.roles,  {'attr': {'class': 'select2'}}) }}
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="form-group row">
+        {{ form_label(form.roles , 'roles'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.roles,  {'attr': {'class': 'select2'}}) }}
+        </div>
     </div>
-</div>
 
-<div class="form-group row">
-    {{ form_label(form.company , 'company.label'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
-    <div class="col-sm-9">
-        {{ form_widget(form.company,  {'attr': {'class': 'select2', 'multiple':'true'}}) }}
+    <div class="form-group row">
+        {{ form_label(form.company , 'company.label'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.company,  {'attr': {'class': 'select2', 'multiple':'true'}}) }}
+        </div>
     </div>
-</div>
-
-
-
-
+{% endif %}
 
 
 <div class="form-group btn-group">

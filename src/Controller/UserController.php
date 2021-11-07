@@ -82,6 +82,58 @@ class UserController extends AbstractController
     }
 
 
+    #[Route('/mon-compte', name: 'user_account', methods: ['GET', 'POST'])]
+    public function user_account(Request $request): Response
+    {
+        $last_email = $this->getUser()->getEmail();
+        $user = $this->getUser() ;
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            /*
+            * On recupere la valeur normalisé du ROLE pour l'enregistrer en array
+            */
+            $theRole = (is_array($form->get('roles')->getNormData())) ? $form->get('roles')->getNormData() : [$form->get('roles')->getNormData()];
+
+            $user->setRoles($theRole);
+
+            /*
+            * On regenere le mot de passe seulement si un nouveau est renseigné
+            */
+            $password_changed = 0;
+            $passwordGet = null;
+            if (!empty($form->get('password')->getData()) && empty($form->get('passwordForce')->getData())) {
+                $user->setPassword(
+                    $form->get('password')->getData()
+                );
+            } else {
+                $user->setPassword(
+                    $this->passwordEncoder->encodePassword($user, $form->get('passwordForce')->getData())
+                );
+                $password_changed = 1;
+                $passwordGet = $form->get('passwordForce')->getData();
+            }
+            /*
+             * On renvoie l'email si le mdp ou email a changé
+            */
+            if ($last_email != $form->get('email')->getData() || $password_changed == 1) {
+                $this->sendAccess($user, $passwordGet);
+            }
+
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('user_account', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('user/user.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user): Response
     {
@@ -132,6 +184,7 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
+
 
     #[Route('/{id}', name: 'user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user): Response

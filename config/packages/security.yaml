@@ -33,6 +33,11 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         - { path: ^/user/mon-compte, roles: ROLE_USER }
+         - { path: ^/facture, roles: ROLE_ADMIN }
+         - { path: ^/company, roles: ROLE_ADMIN }
+         - { path: ^/user, roles: ROLE_ADMIN }
+         - { path: ^/tva, roles: ROLE_ADMIN }
          - { path: ^/, roles: ROLE_USER }
 
     role_hierarchy:

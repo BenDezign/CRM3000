@@ -47,4 +47,8 @@ class UserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByUniqueCriteria(array $criteria){
+        return $this->_em->getRepository(User::class)->findBy($criteria);
+    }
 }
