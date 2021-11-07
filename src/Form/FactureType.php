@@ -15,7 +15,7 @@ class FactureType extends AbstractType
 
         $builder
             ->add('reference')
-            ->add('company')
+            ->add('company', null, ['required'=>true])
             ->add('factureDetails',CollectionType::class , [
                 'entry_type' => FactureDetailType::class,
                 'allow_add' => true ,

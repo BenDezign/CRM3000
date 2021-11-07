@@ -56,7 +56,7 @@ class AppExtension extends AbstractExtension
 
     public function infoMsg($msg)
     {
-        return '<div class="chip chip-info">
+        return '<div class="chip chip-info m-t-3">
             <div class="chip-body">
                 <div class="chip-text"><i class="fa fa-info"></i>&nbsp;' . $msg . '</div>
             </div>
