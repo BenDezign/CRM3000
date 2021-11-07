@@ -20,7 +20,7 @@ class CustomerType extends AbstractType
             ->add('lastname')
             ->add('isReplied')
             ->add('isConsumed')
-            ->add('status', ChoiceType::class, ['choices'=>Status::getChoices(), 'placeholder'=>"Définir un statut"])
+            ->add('status', ChoiceType::class, ['choices'=>Status::getChoices(), 'placeholder'=>"Définir un statut", 'required'=>true])
         ;
     }
 
