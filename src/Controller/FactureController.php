@@ -70,13 +70,10 @@ class FactureController extends AbstractController
     }
 
     #[Route('/{id}/send', name: 'facture_mail_send')]
-    public function facture_send(Facture $id)
+    public function facture_send(Facture $id): Response
     {
 
-        $keyword = "facture";
-        $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/files/' . $keyword;
-        $html_file_dir = $publicDirectory . '/' . $id->getId() . '/';
-        $facture_path = $html_file_dir . $keyword . '_' . $id->getId() . '.pdf';
+        $facture_path = $this->getParameter('kernel.project_dir') . '/public/files/facture/' . $id->getId() . '/facture_'.$id->getId() . '.pdf' ;
 
         if (!file_exists($facture_path)) {
             $this->forward('App\Controller\FactureController::facturePdf', ['id' => $id->getId()]);
@@ -130,34 +127,7 @@ class FactureController extends AbstractController
         ]);
     }
 
-    #[Route('/facturePdf/{id}', name: 'facturePdf')]
-    public function facturePdf(Facture $id, Pdf $pdf)
-    {
-        $keyword = 'facture';
-        $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/files/' . $keyword;
-        $html_file_dir = $publicDirectory . '/' . $id->getId() . '/';
-        $name_of_pdf = $html_file_dir . $keyword . '_' . $id->getId() . '.pdf';
 
-        @mkdir($html_file_dir, 0777, true);
-        @chmod($html_file_dir, 0777);
-
-        $html = $this->renderView('pdf/facture/index.html.twig',
-            ['controller_name' => 'FacturePdfController',
-                'facture' => $id]
-        );
-//        echo $html ; exit ;
-        $pdf->setOption('margin-bottom', "15mm");
-        $pdf->setOption('margin-left', "5mm");
-        $pdf->setOption('margin-right', "5mm");
-        $pdf->setOption('margin-top', "5mm");
-
-        $pdf_doc = $pdf->getOutputFromHtml($html);
-
-        file_put_contents($name_of_pdf, $pdf_doc);
-
-        return new BinaryFileResponse($html_file_dir . $keyword . '_' . $id->getId() . '.pdf');
-
-    }
 
 
 }

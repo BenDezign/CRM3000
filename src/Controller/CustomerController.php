@@ -93,7 +93,7 @@ class CustomerController extends AbstractController
         return $this->redirectToRoute('customer_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    private function sendNotification(Customer $customer)
+    private function sendNotification(Customer $customer): bool
     {
         $customer->setLastEmailAt(new \DateTimeImmutable());
         $this->getDoctrine()->getManager()->flush();
@@ -104,12 +104,11 @@ class CustomerController extends AbstractController
             ->htmlTemplate('email/customer/tpl_' . $customer->getStatus() . '.html.twig');
 
         $this->mailer->send($email);
-
-
-        return ['code' => 200];
+        return true;
     }
 
-    private function getSubjectFromStatus(Customer $customer){
+    private function getSubjectFromStatus(Customer $customer):string
+    {
 
         $subject = match ($customer->getStatus()) {
             default => "Bienvenue, vous venez d'etre inscrit sur notre logiciel",

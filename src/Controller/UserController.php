@@ -84,7 +84,6 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             // On regenere le mot de passe seulement si un nouveau est renseigné
-            $password_changed = 0;
             $passwordGet = null;
             if (!empty($form->get('password')->getData()) && empty($form->get('passwordForce')->getData())) {
                 $user->setPassword(
@@ -94,12 +93,12 @@ class UserController extends AbstractController
                 $user->setPassword(
                     $this->passwordEncoder->encodePassword($user, $form->get('passwordForce')->getData())
                 );
-                $password_changed = 1;
+
                 $passwordGet = $form->get('passwordForce')->getData();
             }
 
              //On renvoie l'email si le mdp ou email a changé
-            if ($last_email != $form->get('email')->getData() || $password_changed == 1) {
+            if ($last_email != $form->get('email')->getData() || $passwordGet !== null) {
                 $this->sendAccess($user, $passwordGet);
             }
 
@@ -175,7 +174,7 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    private function sendAccess(User $user, $pass = null)
+    private function sendAccess(User $user, $pass = null): array
     {
 
         $email = (new TemplatedEmail())
@@ -193,10 +192,13 @@ class UserController extends AbstractController
         return ['code' => 200];
     }
 
-    private function getRole($form){
+    private function getRole($form): ?string
+    {
         return (is_array($form->get('roles')->getNormData())) ? $form->get('roles')->getNormData() : [$form->get('roles')->getNormData()];
     }
-    private function getPassword($form){
+
+    private function getPassword($form): ?string
+    {
         return (empty($form->get('passwordForce')->getData())) ? 'RTX45GP12' : $form->get('passwordForce')->getData();
     }
 }

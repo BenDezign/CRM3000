@@ -53,8 +53,8 @@
                                                 <td>{{ customer.firstname }}</td>
                                                 <td>{{ SHORT.badge_bool(customer.isReplied) }}</td>
                                                 <td>{{ SHORT.badge_bool(customer.isConsumed) }}</td>
-                                                <td>{{ customer.createdAt|date('d-m-Y') }}</td>
-                                                <td>{{ customer.lastEmailAt?customer.lastEmailAt|date('d-m-Y'):'' }}</td>
+                                                <td>{{ customer.createdAt|date('d-m-Y  -  H:i') }}</td>
+                                                <td>{{ customer.lastEmailAt?customer.lastEmailAt|date('d-m-Y  -  H:i'):'' }}</td>
                                                 <td>{{ customer.status|trans }}</td>
                                                 <td>
 

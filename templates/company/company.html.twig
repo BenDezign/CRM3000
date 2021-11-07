@@ -54,7 +54,8 @@
             if (value.length > 0) {
                     url = "https://entreprise.data.gouv.fr/api/sirene/v1/siret/" + value;
                 $.get(url).always(function (response) {
-                    if (response.message == "no results found") {
+                    console.log(response);
+                    if (response.status == "404") {
                         $('.res_sirene').html('<span class="badge badge-danger badge-pill m-1"><i class="fa fa-close"></i> Client non trouvé</span>');
                     } else {
                         $('.res_sirene').html('<span class="badge badge-success badge-pill m-1"><i class="fa fa-check-circle"></i> Client vérifié</span> <br/>');

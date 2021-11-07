@@ -84,6 +84,11 @@ class CompanyController extends AbstractController
     #[Route('/{id}', name: 'company_delete', methods: ['POST'])]
     public function delete(Request $request, Company $company): Response
     {
+        if ($company->getFactures()->count() > 0) {
+            $this->addFlash("danger", "Vous ne pouvez pas supprimer cette société car des factures sont à son nom.");
+            return $this->redirectToRoute('company_edit', ['id' => $company->getId()]);
+        }
+
         if ($this->isCsrfTokenValid('delete' . $company->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($company);

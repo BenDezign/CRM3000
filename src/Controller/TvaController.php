@@ -64,7 +64,7 @@ class TvaController extends AbstractController
     public function delete(Request $request, Tva $tva): Response
     {
         if($tva->getFactureDetails()->count() > 0){
-            $this->addFlash("danger","Je ne pouvais pas supprimer cette TVA car elle est déjà présente dans certaines factures.");
+            $this->addFlash("danger","Vous ne pouvez pas supprimer cette TVA car elle est déjà présente dans certaines factures.");
             return $this->redirectToRoute('tva_edit', ['id'=>$tva->getId()]);
         }
 
