@@ -54,9 +54,15 @@ class Company
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="company")
+     */
+    private $factures;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->factures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,5 +172,35 @@ class Company
     public function __toString(): string
     {
         return $this->getName();
+    }
+
+    /**
+     * @return Collection|Facture[]
+     */
+    public function getFactures(): Collection
+    {
+        return $this->factures;
+    }
+
+    public function addFacture(Facture $facture): self
+    {
+        if (!$this->factures->contains($facture)) {
+            $this->factures[] = $facture;
+            $facture->setCompany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacture(Facture $facture): self
+    {
+        if ($this->factures->removeElement($facture)) {
+            // set the owning side to null (unless already changed)
+            if ($facture->getCompany() === $this) {
+                $facture->setCompany(null);
+            }
+        }
+
+        return $this;
     }
 }
