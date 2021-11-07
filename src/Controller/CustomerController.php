@@ -95,6 +95,8 @@ class CustomerController extends AbstractController
 
     private function sendNotification(Customer $customer)
     {
+        $customer->setLastEmailAt(new \DateTimeImmutable());
+        $this->getDoctrine()->getManager()->flush();
         $email = (new TemplatedEmail())
             ->from(new Address($_ENV['ADMIN_EMAIL'], $_ENV['APP_NAME']))
             ->to(new Address($customer->getEmail(), $customer->getLastname()))

@@ -5,6 +5,7 @@
     {{ form_label(form.siret , 'siret'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
     <div class="col-sm-9">
         {{ form_widget(form.siret,  {'attr': {'class': 'form-control'}}) }}
+        {{ infoMsg("Une API a été installé, saisissez un vrai numéro de SIRET pour essayer.")|raw }}
     </div>
     <div class="res_sirene"></div>
 </div>

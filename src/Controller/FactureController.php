@@ -131,19 +131,6 @@ class FactureController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'facture_delete', methods: ['POST'])]
-    public function delete(Request $request, Facture $facture): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $facture->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($facture);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('facture_index', [], Response::HTTP_SEE_OTHER);
-    }
-
-
     #[Route('/facturePdf/{id}', name: 'facturePdf')]
     public function facturePdf(Facture $id, Pdf $pdf)
     {

@@ -17,6 +17,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('getAvatar', [$this, 'getAvatar']),
             new TwigFunction('getEnv', [$this, 'getEnv']),
             new TwigFunction('prettyPrices', [$this, 'prettyPrices']),
+            new TwigFunction('infoMsg', [$this, 'infoMsg']),
 
         ];
     }
@@ -53,7 +54,14 @@ class AppExtension extends AbstractExtension
         return '<strong>' . $parse_prix[0] . '</strong><sup>,' . $parse_prix[1] . '</sup> <sup>€</sup>';
     }
 
-
+    public function infoMsg($msg)
+    {
+        return '<div class="chip chip-info">
+            <div class="chip-body">
+                <div class="chip-text"><i class="fa fa-info"></i>&nbsp;' . $msg . '</div>
+            </div>
+        </div>';
+    }
 
 
 }

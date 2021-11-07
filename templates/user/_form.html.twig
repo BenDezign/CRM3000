@@ -6,9 +6,11 @@
 </div>
 
 <div class="form-group row">
+
     {{ form_label(form.email , 'email'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
     <div class="col-sm-9">
         {{ form_widget(form.email,  {'attr': {'class': 'form-control'}}) }}
+        {{ infoMsg("Cette email doit etre unique")|raw }}
         <span class="badge badge-danger badge-pill">{{ form_errors(form.email) }}</span>
     </div>
 </div>
@@ -18,17 +20,18 @@
     {{ form_label(form.passwordForce , 'password'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
     <div class="col-sm-9">
         {{ form_widget(form.passwordForce,  {'attr': {'class': 'form-control'}}) }}
+        {{ infoMsg("Si le mot de passe est vide, le logiciel en génère un.")|raw }}
     </div>
 </div>
-{% if is_granted('ROLE_ADMIN') %}
-    <div class="form-group row">
+{% if current_path != "user_account" %}
+    <div class="form-group row {% if current_path == "user_account" or app.user.id == user.id %}d-none{% endif %}">
         {{ form_label(form.roles , 'roles'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
         <div class="col-sm-9">
             {{ form_widget(form.roles,  {'attr': {'class': 'select2'}}) }}
         </div>
     </div>
 
-    <div class="form-group row">
+    <div class="form-group row {% if current_path == "user_account" %}d-none{% endif %}">
         {{ form_label(form.company , 'company.label'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
         <div class="col-sm-9">
             {{ form_widget(form.company,  {'attr': {'class': 'select2', 'multiple':'true'}}) }}

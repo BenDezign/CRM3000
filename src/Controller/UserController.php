@@ -86,18 +86,11 @@ class UserController extends AbstractController
     public function user_account(Request $request): Response
     {
         $last_email = $this->getUser()->getEmail();
-        $user = $this->getUser() ;
+        $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            /*
-            * On recupere la valeur normalisé du ROLE pour l'enregistrer en array
-            */
-            $theRole = (is_array($form->get('roles')->getNormData())) ? $form->get('roles')->getNormData() : [$form->get('roles')->getNormData()];
-
-            $user->setRoles($theRole);
 
             /*
             * On regenere le mot de passe seulement si un nouveau est renseigné
@@ -189,8 +182,13 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+        $userAdmins = $user->getCompanies();
+        foreach ($userAdmins as $userAdmin) {
+            $userAdmin->setUserAdmin(null);
+        }
+        $entityManager->flush();
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
         }
@@ -198,7 +196,7 @@ class UserController extends AbstractController
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    private function sendAccess(User $user, $pass=null)
+    private function sendAccess(User $user, $pass = null)
     {
 
         $email = (new TemplatedEmail())

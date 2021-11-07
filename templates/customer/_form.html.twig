@@ -43,6 +43,7 @@
     {{ form_label(form.status , 'status'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
     <div class="col-sm-9">
         {{ form_widget(form.status,  {'attr': {'class': 'select2'}}) }}
+        {{ infoMsg("À chaque modification du statut, le client reçoit une notification en fonction de son statut.")|raw }}
     </div>
 </div>
 

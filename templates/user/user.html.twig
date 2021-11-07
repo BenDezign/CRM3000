@@ -10,7 +10,9 @@
                         <h4 class="card-title">{{ 'user.add'|trans }}</h4>
                     {% else %}
                         <h4 class="card-title">{{ 'user.edit'|trans }} {{ user.id }}</h4>
-                        {{ include('user/_delete_form.html.twig') }}
+                        {% if app.user.id != user.id %}
+                            {{ include('user/_delete_form.html.twig') }}
+                        {% endif %}
                     {% endif %}
                 </div>
                 <div class="card-content">
@@ -38,13 +40,13 @@
 {% block js %}
     <script>
 
-            $(document).on('click', '.setAdmin', function (){
-                const url = $(this).data('url');
-                $.get(url, function (data){
-                   $('.ls_companies').html(data["html"]);
-                });
-
+        $(document).on('click', '.setAdmin', function () {
+            const url = $(this).data('url');
+            $.get(url, function (data) {
+                $('.ls_companies').html(data["html"]);
             });
+
+        });
 
     </script>
 {% endblock %}

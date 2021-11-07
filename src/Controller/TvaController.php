@@ -63,6 +63,11 @@ class TvaController extends AbstractController
     #[Route('/{id}', name: 'tva_delete', methods: ['POST'])]
     public function delete(Request $request, Tva $tva): Response
     {
+        if($tva->getFactureDetails()->count() > 0){
+            $this->addFlash("danger","Je ne pouvais pas supprimer cette TVA car elle est déjà présente dans certaines factures.");
+            return $this->redirectToRoute('tva_edit', ['id'=>$tva->getId()]);
+        }
+
         if ($this->isCsrfTokenValid('delete'.$tva->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($tva);

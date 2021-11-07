@@ -8,6 +8,7 @@
     {{ form_label(form.Taux , 'taux'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
     <div class="col-sm-9">
         {{ form_widget(form.Taux,  {'attr': {'class': 'form-control'}}) }}
+        {{ infoMsg("Ex: 5,5")|raw }}
     </div>
 </div>
 
@@ -15,6 +16,7 @@
     {{ form_label(form.Tva , 'tva.label'|trans~' : ' , {'label_attr': {'class': 'col-sm-3 col-form-label'}}) }}
     <div class="col-sm-9">
         {{ form_widget(form.Tva,  {'attr': {'class': 'form-control'}}) }}
+        {{ infoMsg("Ex: 1,055")|raw }}
     </div>
 </div>
 
