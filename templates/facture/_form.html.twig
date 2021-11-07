@@ -1,0 +1,25 @@
+
+
+<div class="row justify-content-end">
+    <button class="btn btn-success">{{ button_label|default('Valider') }}</button>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="form-group">
+            {{ form_label(form.company , 'company.label'|trans~' : ') }}
+            {{ form_widget(form.company,  {'attr': {'class': 'select2'}}) }}
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="form-group">
+            {{ form_label(form.reference , 'reference'|trans~' : ') }}
+            {{ form_widget(form.reference,  {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+</div>
+
+
+
+
+

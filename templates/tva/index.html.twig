@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% import 'extra/macros/shortcut.html.twig' as SHORT %}
+{% block body %}
+
+
+    <div class="content-header row">
+        <div class="content-header-left col-md-9 col-12 mb-2">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h2 class="content-header-title float-left mb-0">{{ "tva.list"|trans }}</h2>
+                    <a href=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-body">
+
+        <section id="basic-datatable">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body card-dashboard">
+
+                                <div class="d-flex align-items-center justify-content-end">
+                                    <a href="{{ path('tva_new') }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i>&nbsp;&nbsp;&nbsp;{{ "tva.add"|trans }}</a>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table id="example" class="data-list-view w-100">
+                                        <thead>
+                                        <tr>
+                                            <th>{{ 'id'|trans }}</th>
+                                            <th>{{ 'taux'|trans }}</th>
+                                            <th>{{ 'tva.label'|trans }}</th>
+
+                                            <th>{{ 'actions'|trans }}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for tva in tvas %}
+                                            <tr>
+                                                <td>{{ tva.id }}</td>
+                                                <td>{{ tva.taux }}</td>
+                                                <td>{{ tva.tva }}</td>
+                                                <td>
+
+                                                    <a href="{{ path('tva_edit', {'id': tva.id}) }}" class="btn btn-info"><i class="fal fa-pencil"></i> {{ 'edit'|trans}} </a>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="6">{{ 'no_result'|trans}}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

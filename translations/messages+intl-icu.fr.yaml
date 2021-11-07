@@ -21,6 +21,12 @@ not_started: Non démarrer
 pending: En cours
 cancel: Refusé
 confirm: Validé
+taux: Taux
+reference: Référence
+detail: Détail
+designation: Désignation
+pu: P.U.
+qtt: Quantité
 users: Utilisateurs
 user:
   label: Utilisateur
@@ -36,6 +42,22 @@ company:
   list: Liste des sociétés
   add: Nouvelle société
   edit: Modification de la société n°
+tva:
+  label: TVA
+  list: Liste des TVA
+  add: Nouvelle TVA
+  edit: Modification de la TVA n°
+facture:
+  label: Facture
+  list: Liste des factures
+  add: Nouvelle facture
+  edit: Modification de la facture n°
+  edition:
+    label: Edition de PDF
+    btn: Facture - PDF
+  email:
+    label: Envoie d'emails de PDF
+    btn: Facture - Email
 siret: Siret
 address: Adresse
 city: Ville

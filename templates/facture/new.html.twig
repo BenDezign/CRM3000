@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="content-wrapper">
+        <div class="row mb-4">
+            <div class="col-12 d-flex align-items-center justify-content-between">
+                <h4 class="page-title">{{ 'facture.add'|trans }}</h4>
+
+
+            </div>
+        </div>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form._token) }}
+        <div class="card">
+            <div class="card-body">
+                {{ include('facture/_form.html.twig') }}
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                {{ 'detail'|trans }}
+            </div>
+            <div class="card-body">
+                <table class="table NoDataTable table-responsive-sm">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{ 'reference'|trans }}</th>
+                        <th>{{ 'designation'|trans }}</th>
+                        <th>{{ 'pu'|trans }}</th>
+                        <th>{{ 'qtt'|trans }}</th>
+                        <th>{{ 'tva.label'|trans }}</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="factureDetails-fields-list"
+                           data-prototype='{{ include('facture/facture_detail/_form.html.twig' , {'form' : form.factureDetails.vars.prototype|e }) }}'
+                           data-widget-tags="{{ '<tr></tr>'|e }}"
+                           data-widget-counter="{{ form.children|length }}">
+                    {% for detail in form.factureDetails %}
+                        <tr>
+                            {{ include('facture/facture_detail/_form.html.twig' , {'form' : detail }) }}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row justify-content-center m-t-10">
+                    <button type="button" class="btn btn-circle btn-primary add-another-collection-widget"
+                            data-list-selector="#factureDetails-fields-list">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form, {'render_rest':false}) }}
+    </div>
+{% endblock %}
+
+{% block js %}
+    {{ include('component/script/add_collection.html.twig') }}
+{% endblock %}

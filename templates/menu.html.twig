@@ -62,6 +62,21 @@
                 <a href="{{ path('customer_index') }}"><i class="fal fa-users"></i><span class="menu-title">Clients</span></a>
             </li>
 
+            <li class=" navigation-header"><span>Comptabilité</span></li>
+
+            {% set liste_page = ['facture_index'] %}
+
+            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
+                <a href="{{ path('facture_index') }}"><i class="fal fa-file-invoice-dollar"></i><span class="menu-title">Factures</span></a>
+            </li>
+
+            {% set liste_page = ['tva_index'] %}
+
+            <li class=" nav-item {% if app.request.get('_route') in liste_page %}active{% endif %}">
+                <a href="{{ path('tva_index') }}"><i class="fal fa-sliders-v"></i><span class="menu-title">Tva</span></a>
+            </li>
+
+
 
         </ul>
 

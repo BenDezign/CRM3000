@@ -59,9 +59,9 @@ class Customer
 
     public function __construct()
     {
-        $this->setCreatedAt(new \DateTimeImmutable());
-        $this->setIsConsumed(0);
-        $this->setIsReplied(0);
+        $this->createdAt = new \DateTimeImmutable();
+        $this->isReplied = 0;
+        $this->isConsumed = 0;
     }
 
     public function getId(): ?int

@@ -1,0 +1,23 @@
+<script>
+//Send Mail
+$(document).on('click', '.sendAnEmail', function (e) {
+    var url = $(this).data('href');
+    var text = $(this).text();
+    var thiser = $(this);
+    thiser.addClass('disabled');
+    thiser.html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>&nbsp;' + text);
+
+    $.ajax({
+        url: url,
+        success: function (data) {
+            if (data.reponse_mail == true) {
+                thiser.html('<i class="fa fa-check"></i>&nbsp;' + text);
+            } else {
+                thiser.html('<i class="fa fa-close red"></i>&nbsp;' + text);
+            }
+            thiser.removeClass('disabled');
+
+        }
+    });
+});
+</script>

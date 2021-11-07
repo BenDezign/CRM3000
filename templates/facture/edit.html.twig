@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="content-wrapper">
+        <div class="row mb-4">
+            <div class="col-12 d-flex align-items-center justify-content-between">
+                <h4 class="page-title">{{ 'facture.edit'|trans }} {{ facture.id }}</h4>
+            </div>
+        </div>
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form._token) }}
+        <div class="card">
+            <div class="card-body">
+                <div class="row justify-content-center">
+
+                    <div class="col-md-3 order-1">
+                        <h4 class="text-center">{{ 'facture.edition.label'|trans }}</h4>
+                        <div class="btn-group btn-group-vertical btn-block">
+                            <a class="btn btn-info btn-block text-white text-center" data-toggle="tooltip" target="_blank" title="Visualiser la facture en PDF" href="{{ path('facturePdf' , {'id':facture.id}) }}">{{ 'facture.edition.btn'|trans }}</a>
+                        </div>
+                        <h4 class="text-center m-t-15">{{ 'facture.email.label'|trans }}</h4>
+                        <div class="btn-group btn-group-vertical btn-block">
+                            <a class="btn btn-info btn-block text-white text-center sendAnEmail" data-toggle="tooltip" title="Envoyer la facture au client par mail" data-href="{{ path('facture_mail_send' , {'id':facture.id}) }}">{{ 'facture.email.btn'|trans }}</a>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-9 order-2">
+                        {{ include('facture/_form.html.twig') }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                {{'detail'|trans}}
+            </div>
+            <div class="card-body">
+                <table class="table NoDataTable table-responsive-sm">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>{{ 'reference'|trans }}</th>
+                        <th>{{ 'designation'|trans }}</th>
+                        <th>{{ 'pu'|trans }}</th>
+                        <th>{{ 'qtt'|trans }}</th>
+
+                            <th>{{ 'tva.label'|trans }}</th>
+                    </tr>
+                    </thead>
+                    <tbody id="factureDetails-fields-list"
+                           data-prototype='{{ include('facture/facture_detail/_form.html.twig' , {'form' : form.factureDetails.vars.prototype|e }) }}'
+                           data-widget-tags="{{ '<tr></tr>'|e }}"
+                           data-widget-counter="{{ form.children|length }}">
+                    {% for detail in form.factureDetails %}
+                    <tr>
+                            {{ include('facture/facture_detail/_form.html.twig' , {'form' : detail }) }}
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="row justify-content-center">
+                    <button type="button" class="btn btn-circle btn-primary add-another-collection-widget"
+                            data-list-selector="#factureDetails-fields-list">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(form, {'render_rest':false}) }}
+    </div>
+
+{% endblock %}
+
+{% block js %}
+        {{ include('component/script/sendEmail.html.twig') }}
+        {{ include('component/script/add_collection.html.twig') }}
+{% endblock %}
