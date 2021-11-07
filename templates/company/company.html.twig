@@ -45,5 +45,28 @@
 
         });
 
+        //Check company by SIRET
+        $(document).on('blur change', '#company_siret', function () {
+            let idElement = $(this).attr('id');
+            let value = $(this).val().replace(/\s/g, '');
+            $(this).val(value);
+            let url;
+            if (value.length > 0) {
+                    url = "https://entreprise.data.gouv.fr/api/sirene/v1/siret/" + value;
+                $.get(url).always(function (response) {
+                    if (response.message == "no results found") {
+                        $('.res_sirene').html('<span class="badge badge-danger badge-pill m-1"><i class="fa fa-close"></i> Client non trouvé</span>');
+                    } else {
+                        $('.res_sirene').html('<span class="badge badge-success badge-pill m-1"><i class="fa fa-check-circle"></i> Client vérifié</span> <br/>');
+                        var address = response.etablissement.numero_voie + " " + response.etablissement.type_voie + " " + response.etablissement.libelle_voie;
+                        $("#company_address").val(address);
+                        $("#company_zipCode").val(response.etablissement.code_postal);
+                        $("#company_city").val(response.etablissement.libelle_commune);
+                        $("#company_name").val(response.etablissement.nom_raison_sociale);
+                    }
+                });
+            }
+        });
+
     </script>
 {% endblock %}
