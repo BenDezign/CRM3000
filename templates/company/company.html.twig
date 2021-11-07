@@ -26,5 +26,24 @@
         </div>
     </div>
 
+    {# Listing de tout les users de la societe #}
+    <div class="row justify-content-center  m-t-15 ls_user">
+        {% if "edit" in current_path %}
+            {{ include('component/list_user.html.twig', {'company':company, 'users':company.users}) }}
+        {% endif %}
+    </div>
+{% endblock %}
 
+{% block js %}
+    <script>
+
+        $(document).on('click', '.setAdmin', function (){
+            const url = $(this).data('url');
+            $.get(url, function (data){
+                $('.ls_user').html(data["html"]);
+            });
+
+        });
+
+    </script>
 {% endblock %}

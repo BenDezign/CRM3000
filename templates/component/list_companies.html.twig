@@ -1,0 +1,27 @@
+{% for company in companies %}
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="text-left">
+                    {{ 'company.label'|trans }} {{ company.name }}
+                </div>
+                <div class="text-right">
+                    <div class="form-group">
+                        {% if company.userAdmin is null or user.id != company.userAdmin.id %}
+                            <a href="javascript:void(0);" data-url="{{ path('company_setAdmin',{'company':company.id, 'user':user.id, 'source':'companies'}) }}" data-toggle="tooltip"
+                               title="Affecter en tant que responsable" class="btn btn-sm btn-success setAdmin"><i class="fas fa-check"></i></a>
+                        {% else %}
+                            <span class="badge badge-success badge-pill">Admin</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <strong>{{ 'siret'|trans }}:</strong> {{ company.siret }} <br/>
+                    <strong>{{ 'address'|trans }}:</strong> {{ company.address }} {{ company.zipCode }},{{ company.city }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

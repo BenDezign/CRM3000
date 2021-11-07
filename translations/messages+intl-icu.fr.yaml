@@ -23,6 +23,7 @@ cancel: Refusé
 confirm: Validé
 users: Utilisateurs
 user:
+  label: Utilisateur
   list: Liste des utilisateurs
   add: Nouvel utilisateur
   edit: "Modification de l'utilisateur n°"

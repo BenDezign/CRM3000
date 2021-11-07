@@ -9,7 +9,7 @@
                     {% if "new" in current_path %}
                         <h4 class="card-title">{{ 'user.add'|trans }}</h4>
                     {% else %}
-                        <h4 class="card-title">{{ 'user.edit'|trans}} {{ user.id }}</h4>
+                        <h4 class="card-title">{{ 'user.edit'|trans }} {{ user.id }}</h4>
                         {{ include('user/_delete_form.html.twig') }}
                     {% endif %}
                 </div>
@@ -26,5 +26,25 @@
         </div>
     </div>
 
+    {# Listing de tout les societes du user #}
+    <div class="row justify-content-center  m-t-15 ls_companies">
+        {% if "edit" in current_path %}
+            {{ include('component/list_companies.html.twig', {'companies':user.company, 'user':user}) }}
+        {% endif %}
+    </div>
 
+{% endblock %}
+
+{% block js %}
+    <script>
+
+            $(document).on('click', '.setAdmin', function (){
+                const url = $(this).data('url');
+                $.get(url, function (data){
+                   $('.ls_companies').html(data["html"]);
+                });
+
+            });
+
+    </script>
 {% endblock %}
