@@ -120,5 +120,31 @@ class Facture
         return $this;
     }
 
+    public function getDiffTotalTva(){
+        $details = $this->getFactureDetails();
+        $res = array();
+        foreach ($details as $detail){
+            if(!is_null($detail->getMontantTva()) && $detail->getMontantTva() > 0 ){
+                $key = strval($detail->getTva()->getTaux()) ;
+                if(!isset($res[$key]))
+                    $res[$key] = 0 ;
+
+                $res[$key] += $detail->getMontantTva();
+            }
+
+        }
+        return $res ;
+    }
+
+    public function isAssujettiTva(){
+        $details = $this->getFactureDetails();
+
+        foreach ($details as $detail){
+            if(!is_null($detail->getMontantTva()) && $detail->getMontantTva() >0 )
+                return true;
+        }
+        return false ;
+    }
+
 
 }

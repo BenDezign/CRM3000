@@ -15,6 +15,8 @@ RUN apt-get dist-upgrade && apt-get update
 
 RUN apt-get install -y python3.10 python3-pip
 
+RUN apt-get install -y wkhtmltopdf
+
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 RUN git config --global user.email "benj.teboul@gmail.com" \

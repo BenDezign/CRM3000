@@ -12,8 +12,8 @@ class FactureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
-//            ->add('createdAt')
             ->add('reference')
             ->add('company')
             ->add('factureDetails',CollectionType::class , [
@@ -22,6 +22,7 @@ class FactureType extends AbstractType
                 'allow_delete' => true ,
                 'prototype' => true,
                 'by_reference' => true,
+                'mapped' => true
             ])
         ;
     }

@@ -1,0 +1,50 @@
+{% macro header(isAssujeti) %}
+
+    <thead>
+    <tr>
+        <th class="text-left th-header">Réf.</th>
+        <th class="text-left th-header border-left-white">Désignation</th>
+        <th class="text-center th-header border-left-white" width="80">Qté</th>
+        <th class="text-center th-header border-left-white" width="80">P.U. HT</th>
+        {% if isAssujeti %}
+            <th class="text-center th-header border-left-white" width="80">Tva</th>
+        {% endif %}
+        <th class="text-center th-header border-left-white" width="80">Total HT</th>
+    </tr>
+    </thead>
+{% endmacro %}
+
+{% macro footer(isAssujeti , total , type ) %}
+
+    {% set type_title = " SOUS TOTAL HT" %}
+
+    <tfoot>
+    {% if isAssujeti %}
+    <tr>
+        <td colspan="2"></td>
+        <td class="border-bottom-black" colspan="3">{{type_title}}</td>
+        <td class="border-bottom-black">{{ prettyPrices(total)|raw }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="2"></td>
+        <td class="border-bottom-black" colspan="2">{{type_title}}</td>
+        <td class="border-bottom-black">{{ prettyPrices(total)|raw }}</td>
+    </tr>
+    {% endif %}
+    </tfoot>
+{% endmacro %}
+
+{% macro corps(facturation , isAssujeti ) %}
+    {% set total =  facturation.qtt * facturation.pu %}
+<tr>
+    <td class="text-left bg-grey-dark"><h3>{{ facturation.referenceDet }}</h3></td>
+    <td class="text-left bg-grey"><h3>{{ facturation.libelle }}</h3></td>
+    <td class="text-center bg-grey-dark">{{ facturation.qtt }}</td>
+    <td class="text-right bg-grey">{{ prettyPrices(facturation.pu)|raw }}</td>
+    {% if isAssujeti %}
+        <td class="text-right bg-grey-dark"><strong>{{ facturation.Tva?facturation.Tva.Taux:'-' }} %</strong></td>
+    {%endif %}
+    <td class="text-right {% if isAssujeti %}bg-grey{% else %}bg-grey-dark{% endif %}">{{ prettyPrices(total)|raw }}</td>
+    </tr>
+{% endmacro %}

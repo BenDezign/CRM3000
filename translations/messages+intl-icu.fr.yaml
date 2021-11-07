@@ -1,4 +1,5 @@
 are_you_sur: Êtes-vous sûre ?
+find_element: Nous vous prions de trouver ci-après les éléments demandés.
 id: Id
 actions: Actions
 edit: Modifier
@@ -27,6 +28,10 @@ detail: Détail
 designation: Désignation
 pu: P.U.
 qtt: Quantité
+sous_total: Sous total
+total_tva: Total Tva
+total_ttc: Total Ttc
+net_a_payer: Net a payer
 users: Utilisateurs
 user:
   label: Utilisateur
@@ -52,6 +57,7 @@ facture:
   list: Liste des factures
   add: Nouvelle facture
   edit: Modification de la facture n°
+  to: Facturé à
   edition:
     label: Edition de PDF
     btn: Facture - PDF
