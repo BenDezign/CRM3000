@@ -44,19 +44,11 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /*
-            * On recupere la valeur normalisé du ROLE pour l'enregistrer en array
-            */
-            $theRole = (is_array($form->get('roles')->getNormData())) ? $form->get('roles')->getNormData() : [$form->get('roles')->getNormData()];
+            // On recupere la valeur normalisé du ROLE pour l'enregistrer en array
+            $user->setRoles($this->getRole($form));
 
-            $user->setRoles($theRole);
-
-
-            /*
-            * Si le mot de passe du user est vide on lu genere un mot de passe sinon on prend celui renseigné
-            */
-
-            $passwordGet = (empty($form->get('passwordForce')->getData())) ? 'RTX45GP12' : $form->get('passwordForce')->getData();
+            // Si le mot de passe du user est vide on lu genere un mot de passe sinon on prend celui renseigné
+            $passwordGet = $this->getPassword($form);
 
             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
@@ -64,9 +56,8 @@ class UserController extends AbstractController
                     $passwordGet
                 )
             );
-
+            // Envoie des accès à l'utilisateur
             $this->sendAccess($user, $passwordGet);
-
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
@@ -92,9 +83,7 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /*
-            * On regenere le mot de passe seulement si un nouveau est renseigné
-            */
+            // On regenere le mot de passe seulement si un nouveau est renseigné
             $password_changed = 0;
             $passwordGet = null;
             if (!empty($form->get('password')->getData()) && empty($form->get('passwordForce')->getData())) {
@@ -108,16 +97,13 @@ class UserController extends AbstractController
                 $password_changed = 1;
                 $passwordGet = $form->get('passwordForce')->getData();
             }
-            /*
-             * On renvoie l'email si le mdp ou email a changé
-            */
+
+             //On renvoie l'email si le mdp ou email a changé
             if ($last_email != $form->get('email')->getData() || $password_changed == 1) {
                 $this->sendAccess($user, $passwordGet);
             }
 
-
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('user_account', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -136,18 +122,13 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            /*
-            * On recupere la valeur normalisé du ROLE pour l'enregistrer en array
-            */
-            $theRole = (is_array($form->get('roles')->getNormData())) ? $form->get('roles')->getNormData() : [$form->get('roles')->getNormData()];
+            // On recupere la valeur normalisé du ROLE pour l'enregistrer en array
+            $user->setRoles($this->getRole($form));
 
-            $user->setRoles($theRole);
-
-            /*
-            * On regenere le mot de passe seulement si un nouveau est renseigné
-            */
+            // On regenere le mot de passe seulement si un nouveau est renseigné
             $password_changed = 0;
             $passwordGet = null;
+
             if (!empty($form->get('password')->getData()) && empty($form->get('passwordForce')->getData())) {
                 $user->setPassword(
                     $form->get('password')->getData()
@@ -159,13 +140,11 @@ class UserController extends AbstractController
                 $password_changed = 1;
                 $passwordGet = $form->get('passwordForce')->getData();
             }
-            /*
-             * On renvoie l'email si le mdp ou email a changé
-            */
+
+             // On renvoie l'email si le mdp ou email a changé
             if ($last_email != $form->get('email')->getData() || $password_changed == 1) {
                 $this->sendAccess($user, $passwordGet);
             }
-
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -203,11 +182,7 @@ class UserController extends AbstractController
             ->from(new Address($_ENV['ADMIN_EMAIL'], $_ENV['APP_NAME']))
             ->to(new Address($user->getEmail(), $user->getName()))
             ->subject('Bienvenue sur notre application')
-
-            // path of the Twig template to render
             ->htmlTemplate('email/user/access.html.twig')
-
-            // pass variables (name => value) to the template
             ->context([
                 'id' => $user,
                 'pass' => $pass,
@@ -215,7 +190,13 @@ class UserController extends AbstractController
             ]);
         $this->mailer->send($email);
 
-
         return ['code' => 200];
+    }
+
+    private function getRole($form){
+        return (is_array($form->get('roles')->getNormData())) ? $form->get('roles')->getNormData() : [$form->get('roles')->getNormData()];
+    }
+    private function getPassword($form){
+        return (empty($form->get('passwordForce')->getData())) ? 'RTX45GP12' : $form->get('passwordForce')->getData();
     }
 }

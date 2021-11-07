@@ -52,5 +52,6 @@ docker-compose exec server php bin/console user:create $email@email.com $mdp
 Email client : Recu par l'email renseigné sur la fiche client (envoie automatique apres validation de la fiche client)
 Email Facture : Recu par le user connecté (envoie manuelle depuis facture_edit)
 Email utilisateur : Recu par l'email renseigné sur la fiche utilisateur (envoie automatique apres validation de la fiche utilisateur)
+Penser à vérifier vos spams, l'envoi se fait directement avec PHP
 ``` 
 
