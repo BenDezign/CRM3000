@@ -192,7 +192,7 @@ class UserController extends AbstractController
         return ['code' => 200];
     }
 
-    private function getRole($form): ?string
+    private function getRole($form): ?array
     {
         return (is_array($form->get('roles')->getNormData())) ? $form->get('roles')->getNormData() : [$form->get('roles')->getNormData()];
     }
